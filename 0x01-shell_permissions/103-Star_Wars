@@ -1,2 +1,2 @@
 #!/bin/bash
-telnet towel.blinkenlights.n1
+cat < /dev/tcp/towel.blinkenlights.n1/23
