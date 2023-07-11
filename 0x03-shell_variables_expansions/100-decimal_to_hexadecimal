@@ -1,2 +1,2 @@
 #!/bin/bash
-echo "$(pritnf "%x\n" $DECIMAL)"
+pritnf "%x\n" $DECIMAL
