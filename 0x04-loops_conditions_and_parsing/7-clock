@@ -6,14 +6,15 @@ j=1
 
 echo "Hour: 0"
 
-while ((i < 780 && j < 13))
+while ((i <= 60))
 do
-	if (("$i" % 60 == 0))
+	if (("$i" % 60 == 0 && j < 13))
 	then
 		echo "Hour: $j"
 		((j++))
 		i=0
-	else
+	elif (("$i" < 60))
+	then
 		echo "$i"
 	fi
 	((i++))
