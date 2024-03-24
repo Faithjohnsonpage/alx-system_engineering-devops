@@ -1,9 +1,9 @@
 # Sharing my SSH client configuration for working without typing a password.
 
-file { '~/.ssh/config':
+file { '/home/ermac/.ssh/config':
   ensure  => present,
   content => "
-    Host your_server_address
+    Host *
         IdentityFile ~/.ssh/school
         PasswordAuthentication no
   "
