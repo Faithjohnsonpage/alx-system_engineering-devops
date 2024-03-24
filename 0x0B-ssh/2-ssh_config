@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Sharing my SSH client configuration for working without typing a password.
+
+ssh-copy-id -i ~/.ssh/school ubuntu@100.25.197.208
