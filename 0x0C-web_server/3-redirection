@@ -14,7 +14,7 @@ echo "Hello World!" | sudo tee /var/www/html/index.html >/dev/null
 string_for_replacement="server_name _;\n\trewrite ^\/redirect_me$ https:\/\/www.youtube.com permanent;"
 
 # Replace the default configuration with the redirection configuration
-sudo sed -i "s/server_name _;/$string_for_replacement/" /etc/nginx/sites-available/default
+sudo sed -i "s/server_name _;/$string_for_replacement/" /etc/nginx/sites-enabled/default
 
 # Restart Nginx
 sudo service nginx restart
