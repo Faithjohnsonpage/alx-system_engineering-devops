@@ -23,7 +23,7 @@ echo "Ceci n'est pas une page" | sudo tee /usr/share/nginx/html/custom_404.html
 new_string="error_page 404 /custom_404.html;\n\tlocation = /custom_404.html {\n\t\troot /usr/share/nginx/html;\n\t\tinternal;\n}"
 
 # Update Nginx configuration to use the custom 404 page
-sudo sed -i "s/location \/ {\n\ttry-files \$uri \$uri\/ = 404;\n}/$new_string/" /etc/nginx/sites-enabled/default
+sudo sed -i "s@location \/ {[^}]*}@${new_string}@" /etc/nginx/sites-enabled/default
 
 # Restart Nginx
 sudo service nginx restart
