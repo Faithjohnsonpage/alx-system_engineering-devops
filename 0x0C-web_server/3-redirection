@@ -8,10 +8,10 @@ sudo apt-get update
 sudo apt-get install -y nginx
 
 # Create the index.html file
-echo "Hello World!" | sudo tee /var/www/html/index.html >/dev/null
+echo "Hello World!" | sudo tee /var/www/html/index.html
 
 # Define the redirection configuration
-string_for_replacement="server_name _;\n\trewrite ^\/redirect_me$ https:\/\/www.youtube.com permanent;"
+string_for_replacement="server_name _;\n\trewrite ^\/redirect_me https:\/\/www.youtube.com permanent;"
 
 # Replace the default configuration with the redirection configuration
 sudo sed -i "s/server_name _;/$string_for_replacement/" /etc/nginx/sites-enabled/default
