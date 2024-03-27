@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Script that configures a new Ubuntu machine for redirection
+
+# Update package repositories
+sudo apt-get update
+
+# Install Nginx
+sudo apt-get install -y nginx
+
+# Create the index.html file
+echo "Hello World!" | sudo tee /var/www/html/index.html >/dev/null
+
+# Define the redirection configuration
+string_for_replacement="server_name _;\n\trewrite ^\/redirect_me$ https:\/\/www.youtube.com permanent;"
+
+# Replace the default configuration with the redirection configuration
+sudo sed -i "s/server_name _;/$string_for_replacement/" /etc/nginx/sites-available/default
+
+# Restart Nginx
+sudo service nginx restart
