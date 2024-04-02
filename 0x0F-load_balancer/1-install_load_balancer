@@ -22,7 +22,7 @@ sudo cat /etc/haproxy/haproxy.cfg.original | sudo tee /etc/haproxy/haproxy.cfg
 # Append server configuration to the new file
 server_config="\
 listen hbnb 
-	0.0.0.0:80
+	bind *:80
 	mode http
 	balance roundrobin
 	option httpclose
