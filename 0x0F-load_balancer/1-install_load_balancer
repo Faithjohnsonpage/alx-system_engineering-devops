@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# Install and configure HAproxy on your lb-01 server.
+
+# Update package repositories
+sudo apt-get -y update
+
+# Install HAProxy
+apt-get -y install haproxy
+
+# Enable HAProxy
+echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
+
+# Backup the original configuration file
+sudo mv /etc/haproxy/haproxy.cfg{,.original}
+
+# Create a new configuration file
+sudo touch /etc/haproxy/haproxy.cfg
+
+# Copy the original configuration to the new file
+sudo cat /etc/haproxy/haproxy.cfg.original | sudo tee /etc/haproxy/haproxy.cfg
+
+# Append server configuration to the new file
+server_config="\
+listen hbnb 
+	0.0.0.0:80
+	mode http
+	balance roundrobin
+	option httpclose
+	server 477762-web-01 34.207.63.80:80 check
+	server 477762-web-02 54.208.120.30:80 check
+"
+
+echo "$server_config" | sudo tee -a /etc/haproxy/haproxy.cfg
+
+# Restart HAProxy service
+sudo service haproxy restart
