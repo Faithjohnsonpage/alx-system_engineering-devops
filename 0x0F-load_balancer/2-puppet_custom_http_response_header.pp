@@ -13,7 +13,7 @@ exec { 'install Nginx':
 exec { 'add_header':
   provider    => shell,
   environment => ["HOST=${hostname}"],
-  command     => "sudo sed -i '/http {/a \\ \\ \\ \\ \\ \\ \\ \\ add_header X-Served-By $HOSTNAME;' /etc/nginx/nginx.conf",
+  command     => "sudo sed -i '/http {/a \ \ \ \ \ \ \ \ add_header X-Served-By $HOSTNAME;' /etc/nginx/nginx.conf",
   before      => Exec['restart Nginx'],
 }
 
