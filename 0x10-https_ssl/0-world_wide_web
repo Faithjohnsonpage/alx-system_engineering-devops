@@ -1,24 +1,18 @@
 #!/usr/bin/env bash
-# This Bash script is designed to perform a DNS lookup
+# write a Bash script that will display information about the subdomains
 
-print_lookup() {
-  local result="$1"  # Passing the result as an argument to the function
-  local subdomain="$2" 
-  local record=$(echo "$result" | awk '{print $4}')
-  local ip=$(echo "$result" | awk '{print $5}')
-  echo "The subdomain $subdomain is a $record record and points to $ip"
+dns_config () {
+    script=$(dig "$2"."$1" | grep -A1 'ANSWER SECTION:' | tr '\t' '\n' | tail -2 | tr '\n' ' ')
+    echo "$2 $script" | awk '{print "The subdomain " $1 " is a " $2 " record and points to " $3}'
 }
 
-if [ "$#" -eq 1 ]; then
-  result=$(dig "www.$1" +noall +answer)
-  print_lookup "$result" "www"  # Passing the result to the function
-  result=$(dig "lb-01.$1" +noall +answer)
-  print_lookup "$result" "lb-01"  # Passing the result to the function
-  result=$(dig "web-01.$1" +noall +answer)
-  print_lookup "$result" "web-01"  # Passing the result to the function
-  result=$(dig "web-02.$1" +noall +answer)
-  print_lookup "$result" "web-02"  # Passing the result to the function
-elif [ "$#" -eq 2 ]; then
-  result=$(dig "$2.$1" +noall +answer)
-  print_lookup "$result" "$2"  # Passing the result to the function
+if [ "$#" == 1 ]
+then
+  dns_config "$1" "www"
+  dns_config "$1" "lb-01"
+  dns_config "$1" "web-01"
+  dns_config "$1" "web-02"
+elif [ "$#" == 2 ]
+then
+  dns_config "$1" "$2"
 fi
