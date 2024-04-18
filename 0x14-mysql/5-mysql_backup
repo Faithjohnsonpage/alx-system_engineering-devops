@@ -4,7 +4,7 @@
 filename="$(date +'%d-%m-%y')".tar.gz
 
 # Perform the MySQL dump of all databases
-sudo mysqldump -u root -p "$1" --all-databases > backup.sql
+mysqldump -u root -p "$1" --all-databases > backup.sql
 
 # Create a compressed archive from the dump
-sudo tar -czf "$filename" backup.sql
+tar -czf "$filename" backup.sql
