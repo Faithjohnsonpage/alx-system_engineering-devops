@@ -16,9 +16,9 @@ total_tasks = 0
 task_completed = 0
 
 for task in response2:
-    total_tasks += 1
     if task.get('userId') == employee_id:
-        if task.get('completed') == True:
+        total_tasks += 1
+        if task.get('completed') is True:
             task_completed += 1
 
 for user in response1:
@@ -29,5 +29,5 @@ for user in response1:
 print(user_info)
 for task in response2:
     if task.get('userId') == employee_id:
-        if task.get('completed') == True:
+        if task.get('completed') is True:
             print("\t {}".format(task.get('title')))
