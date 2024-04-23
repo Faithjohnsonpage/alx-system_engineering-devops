@@ -33,5 +33,5 @@ if __name__ == '__main__':
                 final_dict[user_id] = task_list
 
     # Write JSON data to the file
-    with open(file_name, 'w', encoding='utf-8') as f:
+    with open(file_name, 'w') as f:
         json.dump(final_dict, f)
