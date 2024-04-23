@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """This script uses a REST API  for a given employee ID,
-exports employee's data in CSV format."""
+exports employee's data in JSON format."""
 import csv
 import json
 import requests
