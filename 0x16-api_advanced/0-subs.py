@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""This module queries a Reddit API"""
+"""
+This module queries a Reddit API
+"""
 import requests
 
 
@@ -11,9 +13,9 @@ def number_of_subscribers(subreddit):
     url = 'https://www.reddit.com/r/{}/about.json'.format(subreddit)
     headers = {'User-Agent': 'Google Chrome Version 81.0.4044.129'}
     r = requests.get(url, headers=headers, allow_redirects=False)
-    data = r.json()
-
-    try:
-        return data.get('data').get('subscribers')
-    except Exception:
+    if r.status_code == 200:
+        data = r.json()
+        subscribers = data['data']['subscribers']
+        return subscribers
+    else:
         return 0
