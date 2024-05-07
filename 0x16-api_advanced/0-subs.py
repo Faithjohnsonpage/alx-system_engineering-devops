@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """This module queries a Reddit API"""
 import requests
-import sys
 
 
 def number_of_subscribers(subreddit):
