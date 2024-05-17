@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Gracefully reloads Gunicorn.
+
+# Get the PIDs of Gunicorn processes
+GUNICORN_PIDS=$(pgrep gunicorn)
+
+# Check if any Gunicorn PIDs were found
+if [ -n "$GUNICORN_PIDS" ]; then
+  # Send the HUP signal to each Gunicorn PID
+  echo "$GUNICORN_PIDS" | xargs kill -HUP
+  echo "Sent HUP signal to Gunicorn processes to reload gracefully."
+else
+  echo "No Gunicorn processes found."
+fi
