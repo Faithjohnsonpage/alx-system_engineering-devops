@@ -2,7 +2,7 @@
 # Gracefully reloads Gunicorn.
 
 # Get the PIDs of Gunicorn processes
-GUNICORN_PIDS=$(pgrep gunicorn)
+GUNICORN_PIDS=$(ps aux | grep gunicorn | grep -v grep | awk '{ print $2 }')
 
 # Check if any Gunicorn PIDs were found
 if [ -n "$GUNICORN_PIDS" ]; then
